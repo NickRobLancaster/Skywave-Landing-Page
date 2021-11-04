@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>skywave_landing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body id="app_body" style="background: linear-gradient(-178deg, rgb(0,95,163) 50%, white) fixed;">
+    <div id="blue-stripe" class="position-absolute"></div>
+    <nav class="navbar navbar-light navbar-expand-md fixed-top bg-white shadow-lg">
+        <div class="container-fluid"><a class="navbar-brand" href="#"><img class="img-fluid" src="assets/img/skywaveLogo.png" width="200"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">CRM</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">VOICE (VoIP)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">MARKETING</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">CONTACT US</a></li>
+                    <li class="nav-item"><a class="btn btn-primary border-0" role="button" href="tel:8556866162" style="background: rgb(23, 172, 232);">(855) 686-6162</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-center text-white"><strong>FINALLY, A CRM THAT DOES IT ALL</strong></h2>
+                    </div>
+                    <div class="col-12">
+                        <hr style="background: #ffffff;">
+                    </div>
+                    <div class="col-12">
+                        <h4 class="text-center text-white"><strong>FAST.&nbsp; &nbsp; POWERFUL.&nbsp; &nbsp; FEATURE RICH.</strong><br></h4>
+                    </div>
+                    <div class="col-12"><img class="img-fluid" src="assets/img/pcGraphic.png"></div>
+                </div>
+            </div>
+            <div class="col-md-5 pl-5 pr-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="text-center text-white"><strong>SEE OUR SOFTWARE IN ACTION!&nbsp; &nbsp;REQUEST MORE INFO OR...</strong><br></h5>
+                    </div>
+                    <div class="col-12">
+                        <h3 class="text-center text-white"><strong>SCHEDULE A DEMO</strong><br></h3>
+                    </div>
+                    <div class="col-12 shadow-lg p-4" id="web-form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success text-center" role="alert" v-show="success_confirmation == true"><i class="fa fa-check fa-3x display-block"></i><span>Your information has been submitted successfully. One of our representatives will reach out to you shortly</span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger text-center" role="alert" v-show="failed_validation_alert == true"><span><i class="fa fa-close"></i>&nbsp;Please complete highlighted fields and re-submit the form</span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form v-show="form_is_hidden == false">
+                                    <div class="form-row">
+                                        <div class="col-md-6"><label>First Name</label><input class="form-control" type="text" v-model="first_name" v-on:blur="validateFirstName">
+                                            <div class="alert alert-danger p-1" role="alert" v-show="fn_alert == true"><span><strong><em>First Name</em></strong><em> must be 2 or more characters.</em></span></div>
+                                        </div>
+                                        <div class="col-md-6"><label>Last Name</label><input class="form-control" type="text" v-model="last_name" v-on:blur="validateLastName">
+                                            <div class="alert alert-danger padding-all-side border-radius-all p-1" role="alert" v-show="ln_alert == true"><span><strong><em>Last Name</em></strong><em> must be 2 or more characters.</em><br></span></div>
+                                        </div>
+                                        <div class="col-md-12"><label>Email</label><input class="form-control" type="text" v-model="email" v-on:blur="validateEmail">
+                                            <div class="alert alert-danger padding-all-side border-radius-all p-1" role="alert" v-show="email_alert == true"><span><strong><em>Email Address</em></strong><em>&nbsp;must contain an&nbsp;</em><strong><em>@</em></strong><em>&nbsp;symbol and a&nbsp;</em><strong><em>Period</em></strong></span></div>
+                                        </div>
+                                        <div class="col-md-12"><label>Phone Number</label><input class="form-control" type="text" v-model="primary_phone" v-on:blur="validatePhone">
+                                            <div class="alert alert-danger padding-all-side border-radius-all p-1" role="alert" v-show="primary_phone_alert == true"><span><strong><em>Phone Number</em></strong><em>&nbsp;must be 10 digits long</em></span></div>
+                                        </div>
+                                        <div class="col-md-12"><label>Company Name</label><input class="form-control" type="text" v-model="company_name" v-on:blur="validateCompanyName">
+                                            <div class="alert alert-danger padding-all-side border-radius-all p-1" role="alert" v-show="company_name_alert == true"><span><strong><em>Company Name</em></strong><em>&nbsp;must be 2 or more characters.</em></span></div>
+                                        </div>
+                                        <div class="col-md-12 text-right pt-3"><button class="btn btn-primary" id="submit-button" type="button" v-on:click="submitFormData">Submit</button></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 pt-3"><img class="img-fluid" src="assets/img/swPricing.png"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-5">
+            <div class="col-md-6 text-center d-xl-flex align-items-xl-center">
+                <div class="row">
+                    <div class="col-12"><img class="img-fluid pl-5 pt-5 pb-4 shadow-lg" src="assets/img/row2Graphic.png"></div>
+                    <div class="col-12"><a class="btn btn-primary mb-5 mt-5" role="button" style="background: #30ace8;" href="https://skywave.app/features/" target="_blank">See All Features</a></div>
+                </div>
+            </div>
+            <div class="col-md-5 offset-md-1 d-xl-flex order-sm-1 align-items-xl-center">
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <div class="row">
+                            <div class="col-12"><img class="img-fluid" src="assets/img/Headset.png" width="75"></div>
+                            <div class="col-12">
+                                <h5><strong>Call Center Ready</strong><br></h5>
+                            </div>
+                            <div class="col-12">
+                                <p>Our phone system integrations along with our built in call center operation tools will allow you to manage your call center straight from your CRM.<br></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="row">
+                            <div class="col-12"><img class="img-fluid" src="assets/img/chatBubble.png" width="75"></div>
+                            <div class="col-12">
+                                <h5><strong>SMS and E-Mail Enabled</strong><br></h5>
+                            </div>
+                            <div class="col-12">
+                                <p>Send SMS, E-mail, and Fax via the CRM, get notified upon responses, keep all your conversations in one interface. Create SMS and Email templates easily.<br></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="row">
+                            <div class="col-12"><img class="img-fluid" src="assets/img/drawPad.png" width="75"></div>
+                            <div class="col-12">
+                                <h5><strong>Built-In eSign Service</strong><br></h5>
+                            </div>
+                            <div class="col-12">
+                                <p>Send Documents for signature right from the customer file.&nbsp; Sent and generated documents will also auto populate any information needed from the file.<br></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="row">
+                            <div class="col-12"><img class="img-fluid" src="assets/img/gears.png" width="75"></div>
+                            <div class="col-12">
+                                <h5><strong>Rooted in Automation</strong><br></h5>
+                            </div>
+                            <div class="col-12">
+                                <p>Let your CRM work FOR you with automated communication, actions, triggers, and much more.&nbsp; Focus on what you do best, let the CRM handle the legwork.<br></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 d-xl-flex align-items-xl-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h3><strong>BUILT-IN MARKETING TOOLS</strong><br></h3>
+                    </div>
+                    <div class="col-12">
+                        <p>Just another way to keep all your needs in one software solution.&nbsp; Skywave CRM can handle mass-marketing easily by simply loading a list, choosing your method of marketing, and pressing play.&nbsp; Send as fast or as slow as you need to.<br></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="text-align: center;"><img class="img-fluid pl-5 pt-5 pb-4 shadow-lg" src="assets/img/rvmRight.png"><a class="btn btn-primary mt-5 mb-5" role="button" href="https://skywave.app/voice/" target="_blank" style="background: #30ace8;">Learn More</a></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-12"><img class="img-fluid pl-5 pt-5 pb-4 shadow-lg" src="assets/img/callCenterLeft.png"></div>
+                </div>
+            </div>
+            <div class="col-md-6 d-xl-flex align-items-xl-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h3><strong>Bleeding Edge Technology</strong></h3>
+                    </div>
+                    <div class="col-12">
+                        <p>Skywave Broadcast (included in CRM) allows you to send Ringless Voicemails, Mass Text Messages, Mass Emails, or use the Power Dialer, with a simple, wallet-based billing system.&nbsp; However you prefer to reach large audiences, Skywave has you covered.<br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row pb-5 pt-5">
+                    <div class="col-12">
+                        <h3 class="text-center"><strong>INTEGRATIONS.&nbsp; API READY.</strong><br></h3>
+                    </div>
+                    <div class="col-md-6 offset-md-3">
+                        <p>In an effort to make our software the most versatile CRM out there, we have hundreds of custom integrations to make your business run smoother.&nbsp; Merchant Processors, Phone system, Dialers, and More!<br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"><iframe allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/O_C5M3y38Lg" width="100%" height="350"></iframe></div>
+            <div class="col-md-5 offset-md-1 d-xl-flex align-items-xl-center"><img class="img-fluid" src="assets/img/lastRow.png"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pb-3 pt-5">
+                <h3 class="text-center"><strong>FULLY INTEGRATED WITH SKYWAVE VOICE</strong><br></h3>
+            </div>
+            <div class="col-md-5 offset-md-1">
+                <div class="row">
+                    <div class="col-12">
+                        <p>Our VoIP software, Skywave Voice, goes head to head with some of the top VoIP providers out there, and is fully integrated with our CRM.&nbsp; The two together create truly the Ultimate Business Solution.<br></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <p>Access features like Click 2 Call, Call Recordings automatically uploaded, CDR reports, LIVE OPERATOR PANEL, suppression lists, and campaign management.&nbsp; As well as ring groups, call queues, priority based ringing, and more.<br></p>
+            </div>
+            <div class="col-12 text-center pb-5 pt-3"><a class="btn btn-primary" role="button" href="https://skywave.app/voice/" target="_blank" style="background: #30ace8;">Learn More</a></div>
+            <div class="col-md-12 mb-5" style="text-align: center;"><img class="img-fluid" src="assets/img/lastImage.png"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-12">
+                        <h3><strong>RECEIVE LATEST NEWS AND SPOTLIGHTS</strong><br></h3>
+                    </div>
+                    <div class="col-12">
+                        <p>At Skywave, we are always adding new features, integrations, and modules to improve the efficiency of your business.&nbsp; Follow us on social media to stay aware of all new and upcoming features.&nbsp; We have a lot of really cool things on the horizon and we wouldn't want you to miss out!<br></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-3 text-center"><a class="btn btn-light" role="button" href="https://www.facebook.com/skywavecrm-104695751303159/" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a></div>
+                    <div class="col-3 text-center"><a class="btn btn-light" role="button" href="https://twitter.com/skywave_app" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a></div>
+                    <div class="col-3 text-center"><a class="btn btn-light" role="button" href="https://www.linkedin.com/company/skywave-app/" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a></div>
+                    <div class="col-3 text-center"><a class="btn btn-light" role="button" href="https://www.instagram.com/skywave_app/" target="_blank"><i class="fa fa-instagram fa-2x"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-center"><img class="img-fluid" src="assets/img/skywaveLogo.png">
+                <p class="text-muted" style="font-size: 11px;">Making your business easier through automation<br></p>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-12 p-2"><a href="https://skywave.app/" style="color: rgb(92,94,95);" target="_blank">About</a></div>
+                    <div class="col-12 p-2"><a href="https://skywave.app/features" style="color: rgb(92,94,95);" target="_blank">Features</a></div>
+                    <div class="col-12 p-2"><a href="https://skywave.app/integrations" style="color: rgb(92,94,95);" target="_blank">Integrations</a></div>
+                    <div class="col-12 p-2"><a href="tel:8556866162" style="color: rgb(92,94,95);" target="_blank">Contact</a></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-12 p-2"><a href="https://skywave.app/voice" style="color: rgb(92,94,95);" target="_blank">Voice</a></div>
+                    <div class="col-12 p-2"><a href="https://skywave.app/marketing-platform/" style="color: rgb(92,94,95);" target="_blank">Marketing</a></div>
+                    <div class="col-12 p-2"><a href="https://livesigner.com/" style="color: rgb(92,94,95);" target="_blank">Live Signer</a></div>
+                    <div class="col-12 p-2"><a href="https://skywave.app/schedule-demo/" style="color: rgb(92,94,95);" target="_blank">Schedule Demo</a></div>
+                </div>
+            </div>
+            <div class="col-12"><script type="text/javascript">
+    window._chatlio = window._chatlio||[];
+    !function(){ var t=document.getElementById("chatlio-widget-embed");if(t&&window.ChatlioReact&&_chatlio.init)return void _chatlio.init(t,ChatlioReact);for(var e=function(t){return function(){_chatlio.push([t].concat(arguments)) }},i=["configure","identify","track","show","hide","isShown","isOnline", "page", "open", "showOrHide"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];n.id="chatlio-widget-embed",n.src="https://w.chatlio.com/w.chatlio-widget.js",n.async=!0,n.setAttribute("data-embed-version","2.3");
+       n.setAttribute('data-widget-id','6e5306a2-719d-436b-5929-2eebb559364f');
+        //
+        _chatlio.identify('user1234', {
+        name: 'Elvis Presley',
+        email: 'elvis@graceland.com',
+        plan: 'king',
+        favoriteColor: 'black'
+  });
+        //
+       c.parentNode.insertBefore(n,c);
+    }();
+</script></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="assets/js/main_vue.js"></script>
+</body>
+
+</html>
